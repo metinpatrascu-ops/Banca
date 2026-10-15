@@ -3,148 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>VOLT - Mobile Banking Demo</title>
+    <title>VOLT - Banking App</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: #141b2d;
-            --card-border: rgba(255, 255, 255, 0.08);
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --text-main: #ffffff;
-            --text-secondary: #94a3b8;
-            --accent-green: #10b981;
-            --danger: #ef4444;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: #080c14;
+            color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 12px;
+            align-items: flex-start;
+            padding: 0;
         }
 
-        .mobile-container {
+        .app-window {
             width: 100%;
-            max-width: 420px;
-            background-color: var(--bg-color);
+            max-width: 430px;
             min-height: 100vh;
+            background: #0d1322;
+            padding: 20px 18px 90px 18px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 20px 16px;
             position: relative;
         }
 
         /* Top Header */
-        .header {
+        .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
+            padding-top: 10px;
         }
 
-        .logo-area {
+        .brand {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #6366f1, #a855f7);
-            border-radius: 10px;
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 18px;
-            color: white;
-        }
-
-        .logo-text {
+            font-weight: 800;
             font-size: 20px;
-            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .brand-name {
+            font-size: 22px;
+            font-weight: 800;
             letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .header-actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .icon-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            width: 40px;
-            height: 40px;
+        .user-avatar {
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-main);
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .icon-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            border: 2px solid #6366f1;
             object-fit: cover;
-            border: 2px solid var(--primary);
         }
 
-        /* Greeting Section */
-        .greeting-section {
+        /* Hero Greeting */
+        .greeting-box {
             margin-bottom: 20px;
         }
 
         .greeting-title {
             font-size: 24px;
             font-weight: 700;
-            margin-bottom: 6px;
             color: #ffffff;
-        }
-
-        .greeting-subtitle {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        /* Currency Selector Pills */
-        .currency-pills {
             display: flex;
-            background: var(--card-bg);
+            align-items: center;
+            gap: 8px;
+        }
+
+        .greeting-sub {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        /* Currency Pills */
+        .currency-switch {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
             padding: 4px;
             border-radius: 14px;
-            border: 1px solid var(--card-border);
-            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 18px;
         }
 
-        .pill {
+        .curr-btn {
             flex: 1;
-            padding: 10px;
-            text-align: center;
-            border-radius: 10px;
+            padding: 10px 0;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
             font-size: 13px;
-            font-
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .curr-btn.active {
+            background: #6366f1;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+        }
+
+        /* Balance Card */
+        .balance-card {
+            background: linear-gradient(145deg, #151c2e, #101625);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 22px 18px;
+            margin-bottom: 24px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .card-label {
+            font-size: 13px;
+            color: #94
